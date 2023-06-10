@@ -102,14 +102,17 @@ class Raids(Frame):
                         rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#8fbc8f', activefill="red", width=0)
                         self.canvas_mid.tag_bind(rec, '<Button-1>', self.rec_click_event)
                         #Horizontal 
-                        self.canvas_mid.create_line(x0,y0,x1,y0,dash=[2,4], width=3, activefill='black', activewidth=6)
+                        ligne = self.canvas_mid.create_line(x0,y0,x1,y0,dash=[2,4], width=3, activefill='black', activewidth=6)
+                        self.canvas_mid.tag_bind(ligne, '<Button-1>', self.ligne_ckick_event)
                     #Vertical
-                    self.canvas_mid.create_line(x0,y0,x0,y1,dash=[2,4], width=3, activefill='black', activewidth=6)
+                    ligne = self.canvas_mid.create_line(x0,y0,x0,y1,dash=[2,4], width=3, activefill='black', activewidth=6)
+                    self.canvas_mid.tag_bind(ligne, '<Button-1>', self.ligne_ckick_event)
 
                 else:
                     if(k != 19):
                         #Bottom
-                        self.canvas_mid.create_line(x0,y0,x1,y0,dash=[2,4], width=3, activefill='black', activewidth=6)
+                        ligne = self.canvas_mid.create_line(x0,y0,x1,y0,dash=[2,4], width=3, activefill='black', activewidth=6)
+                        self.canvas_mid.tag_bind(ligne, '<Button-1>', self.ligne_ckick_event)
                     
 
         #Inside right panel
@@ -128,6 +131,7 @@ class Raids(Frame):
         list_colors = ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C']
         
         item = event.widget.find_closest(event.x, event.y)
+        #print(item, 'rec')
         color = self.canvas_mid.itemcget(item, "fill")
         ind_color = list_colors.index(color)
 
@@ -138,6 +142,21 @@ class Raids(Frame):
 
         self.canvas_mid.itemconfigure(item, fill=list_colors[new_indice])
 
+
+    def ligne_ckick_event(self, event):
+        list_colors = ['black','#E8A857','#AC8C6A','#5E534F','#795A4C']
+
+        item = event.widget.find_closest(event.x, event.y)
+        #print(item, 'ligne')
+        color = self.canvas_mid.itemcget(item, "fill")
+        ind_color = list_colors.index(color)
+
+        if (ind_color==len(list_colors)-1):
+            new_indice = 0
+        else:
+            new_indice = ind_color+1
+
+        self.canvas_mid.itemconfigure(item, fill=list_colors[new_indice])
 
 
 def main():
