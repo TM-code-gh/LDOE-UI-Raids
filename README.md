@@ -3,11 +3,19 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 <br>
 <br>
 
+
+<ins>**BUGS**</ins>:<br>
+10/06/23
+- Clique sur ligne (ligne active) => Détecte rectangle (Potentiellement bug sur 1 ligne de pixel supérieur et inférieur) :
+  - Expliquation supplémentaire :  Le pixel de souris est sur le rectangle mais la ligne est toujours considérée comme active.
+  <br> => Problème de compréhension entre les objets pour savoir lequel est réellement actif. 
+<br>
+
 <ins>**TODO**</ins>:
 - Gestion des lignes => Fonctions équivalentes aux rectangles
 - Gestions des autres zones "non constructibles"
 - Changement de l'aspect des sols (Images plutôt que couleurs)
-- Frame _right_mid_ avec boutons de sélections pour:
+- Frame _right_mid_ avec boutons de sélections pour :
   - Un niveau de sol/mur spécifique
   - Objets plaçables dans la base
 - Liste des objets :
@@ -17,7 +25,7 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 - Lier barre de recherche dans _left_top_ avec la BDD de _left_mid_
 - Lier le texte dans la frame _mid_top_ et la table sélectionnée dans la BDD de _left_mid_
 - Modifier l'ancre des boutons **Chercher** dans les Frames _left_top_ et _right_top_ pour être au centre
-- Gestion de sauvegarde du "dessin" => Idée: Fichiers de configuration + BDD
+- Gestion de sauvegarde du "dessin" => Idée : Fichiers de configuration + BDD
 <br>
 
 - Etendre l'application aux spécificités de la colonie
@@ -28,8 +36,8 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 - Taille de canvas responsive => Idée : Dessin responsive => Bouton UPDATE?
 - Couleur canvas (_dark sea green_)
 - Création de grille (18x18+1+1) avec lignes et rectangles (options _activefill_, _activewidth_)
-- Définition de la fonction **rec_click_event(event)**:
-  - Clique gauche sur un rectangle change sa couleur parmis les 5 possibles: ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C'] => Boucle
+- Définition de la fonction **rec_click_event(event)** :
+  - Clique gauche sur un rectangle change sa couleur parmis les 5 possibles : ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C'] => Boucle
   - Les 5 couleurs représentent le niveau d'un sol entre 0 et 5 => Idée : Image de sol plutôt que couleur
 <br>
 
