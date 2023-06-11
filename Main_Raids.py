@@ -90,30 +90,40 @@ class Raids(Frame):
         width = int(self.canvas_mid.winfo_width())-4
         height = int(self.canvas_mid.winfo_height())-4
 
-        for i in range(1,20):
-            for k in range(1,20):
-                x0 = (k)*(width/20)+2
-                y0 = (i)*(height/20)+2
-                x1 = (k+1)*(width/20)+2
-                y1 = (i+1)*(height/20)+2
+        #création ligne/Rectangle
+        for y in range(1,20):
+            for x in range(1,20):
+                x0 = (x)*(width/20)+2
+                y0 = (y)*(height/20)+2
+                x1 = (x+1)*(width/20)+2
+                y1 = (y+1)*(height/20)+2
 
-                if(i != 19):
-                    if(k != 19):
-                        rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#8fbc8f', activefill="red", width=0)
-                        self.canvas_mid.tag_bind(rec, '<Button-1>', self.rec_click_event)
-                        #Horizontal 
-                        ligne = self.canvas_mid.create_line(x0,y0,x1,y0,dash=[2,4], width=3, activefill='black', activewidth=6)
-                        self.canvas_mid.tag_bind(ligne, '<Button-1>', self.ligne_ckick_event)
-                    #Vertical
-                    ligne = self.canvas_mid.create_line(x0,y0,x0,y1,dash=[2,4], width=3, activefill='black', activewidth=6)
-                    self.canvas_mid.tag_bind(ligne, '<Button-1>', self.ligne_ckick_event)
+                # Rectangle
+                if(x in range(13,17)) and (y in range(14, 19)):
+                    #rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#EF9A9A', width=0)
+                    rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='blue', width=0)
 
                 else:
-                    if(k != 19):
-                        #Bottom
-                        ligne = self.canvas_mid.create_line(x0,y0,x1,y0,dash=[2,4], width=3, activefill='black', activewidth=6)
+                    if((x != 19) and (y != 19)):
+                        rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#8fbc8f', activefill="red", width=0)
+                        self.canvas_mid.tag_bind(rec, '<Button-1>', self.rec_click_event)
+
+                # Ligne
+                if(x != 19): #Ne pas avoir la colonne de droite
+                    if (x not in range(13,17)) or (y not in range(15,20)): #Ne pas avoir les lignes inconstructibles
+                        #Horizontal 
+                        ligne = self.canvas_mid.create_line(x0,y0,x1,y0,dash=[2,4], fill="white", width=3, activefill='black', activewidth=6)
                         self.canvas_mid.tag_bind(ligne, '<Button-1>', self.ligne_ckick_event)
-                    
+                
+                if(y != 19): #Ne pas avoir la ligne du bas
+                    if (x not in range(14,17)) or (y not in range(14,20)): #Ne pas avoir les lignes inconstructibles
+                        #Vertical
+                        ligne = self.canvas_mid.create_line(x0,y0,x0,y1,dash=[2,4], fill="white", width=3, activefill='black', activewidth=6)
+                        self.canvas_mid.tag_bind(ligne, '<Button-1>', self.ligne_ckick_event)
+
+
+
+
 
         #Inside right panel
         #Inside right top panel
@@ -131,7 +141,6 @@ class Raids(Frame):
         list_colors = ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C']
         
         item = event.widget.find_closest(event.x, event.y)
-        #print(item, 'rec')
         color = self.canvas_mid.itemcget(item, "fill")
         ind_color = list_colors.index(color)
 
@@ -144,10 +153,13 @@ class Raids(Frame):
 
 
     def ligne_ckick_event(self, event):
-        list_colors = ['black','#E8A857','#AC8C6A','#5E534F','#795A4C']
+        list_colors = ['white','#E8A857','#AC8C6A','#5E534F','#795A4C']
 
         item = event.widget.find_closest(event.x, event.y)
-        #print(item, 'ligne')
+        print(item, 'ligne')
+        coord = self.canvas_mid.coords(item)
+        print('ligne x0', int(0.2+20*coord[0]/int(self.canvas_mid.winfo_width())))
+        print('ligne y0', int(0.2+20*coord[1]/int(self.canvas_mid.winfo_height())))
         color = self.canvas_mid.itemcget(item, "fill")
         ind_color = list_colors.index(color)
 
@@ -163,10 +175,8 @@ def main():
 
     root = Tk()
     root.title("Fenêtre de Raids")
-    # Width x Height + X + Y
-    root.geometry('1200x800+400+80')
+    root.geometry('1200x800+400+80')# Width x Height + X + Y
     app = Raids()
-
     root.mainloop()
 
 
