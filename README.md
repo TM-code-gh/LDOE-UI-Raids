@@ -5,15 +5,17 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 
 
 <ins>**BUGS**</ins>:<br>
-10/06/23
+10/06/23 ==> **MAJOR BUG**
 - Clique sur ligne (ligne active) => Détecte rectangle (Potentiellement bug sur 1 ligne de pixel supérieur et inférieur) :
-  - Expliquation supplémentaire :  Le pixel de souris est sur le rectangle mais la ligne est toujours considérée comme active.
-  <br> => Problème de compréhension entre les objets pour savoir lequel est réellement actif. 
+  - Expliquation supplémentaire :  Le pixel de souris est sur le rectangle mais la ligne est toujours considérée comme active.<br>
+   => Problème de compréhension entre les objets pour savoir lequel est réellement actif. <br>
+  !!! La fonction ligne s'applique au rectangle sous la souris !!!
 <br>
 
 <ins>**TODO**</ins>:
-- Gestion des lignes => Fonctions équivalentes aux rectangles
-- Gestions des autres zones "non constructibles"
+- Permettre un changement d'angle du canvas (orientation)
+  - Connexe avec une fonction zoom in/out
+  - Connexe avec une posibilité d'avoir des sides barres
 - Changement de l'aspect des sols (Images plutôt que couleurs)
 - Frame _right_mid_ avec boutons de sélections pour :
   - Un niveau de sol/mur spécifique
@@ -29,6 +31,13 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 <br>
 
 - Etendre l'application aux spécificités de la colonie
+<br>
+
+================================ 10-11/06/23 ==============================
+- Définition de la fonction **ligne_ckick_event(event)** :
+  - Clique gauche sur une ligne change sa couleur parmis les 5 possibles : ['white','#E8A857','#AC8C6A','#5E534F','#795A4C'] => Boucle
+  - Les 5 couleurs représentent le niveau d'un mur entre 0 et 5 => Idée : Image de mur plutôt que couleur
+- Gestion de la zone rectangulaire non constructible (x0=13,y0=14,x1=17,y1=19)
 <br>
 
 ================================ 07/06/23 ================================
