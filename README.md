@@ -10,7 +10,12 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
   - Expliquation supplémentaire :  Le pixel de souris est sur le rectangle mais la ligne est toujours considérée comme active.<br>
    => Problème de compréhension entre les objets pour savoir lequel est réellement actif. <br>
   !!! La fonction ligne s'applique au rectangle sous la souris !!!
+
+11/06/23 ==> MINOR BUG
+- Lagg lors du redimensionnement de la fenêtre principale :
+  - Expliquation supplémentaire : Test de repasser la taille du canvas en dure (non relative) non concluant
 <br>
+
 
 <ins>**TODO**</ins>:
 - Permettre un changement d'angle du canvas (orientation)
