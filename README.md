@@ -6,7 +6,7 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 
 <ins>**BUGS**</ins>:<br>
 10/06/23 ==> **MAJOR BUG**
-- Clique sur ligne (ligne active) => Détecte rectangle (Potentiellement bug sur 1 ligne de pixel supérieur et inférieur) :
+- Clique sur ligne (ligne active): Détecte rectangle (Potentiellement bug sur 1 ligne de pixel supérieur et inférieur) :
   - Expliquation supplémentaire :  Le pixel de souris est sur le rectangle mais la ligne est toujours considérée comme active.<br>
    => Problème de compréhension entre les objets pour savoir lequel est réellement actif. <br>
   !!! La fonction ligne s'applique au rectangle sous la souris !!!
