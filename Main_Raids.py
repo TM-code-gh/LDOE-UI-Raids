@@ -51,7 +51,7 @@ class Raids(Frame):
         self.search_left.pack(padx=20, pady=20)
 
         self.button_search_left = Button(self.frame_left_top, text='Chercher')
-        self.button_search_left.place(relx=0.35, rely=0.6)
+        self.button_search_left.place(relx=0.5, rely=0.75, anchor=CENTER)
 
         #Inside left mid panel
         self.frame_left_mid = Frame(self.frame_left, highlightbackground="black", highlightthickness=1)
@@ -134,6 +134,7 @@ class Raids(Frame):
         self.item = 'None'
         self.item_type = 'None'
 
+
         #Inside right panel
         #Inside right top panel
         self.frame_right_top = Frame(self.frame_right, highlightbackground="black", highlightthickness=1)
@@ -143,7 +144,12 @@ class Raids(Frame):
         self.search_right.pack(padx=20, pady=20)
 
         self.button_search_right = Button(self.frame_right_top, text='Chercher')
-        self.button_search_right.place(relx=0.35, rely=0.6)
+        self.button_search_right.place(relx=0.5, rely=0.75, anchor=CENTER)
+
+        #Inside right mid panel
+        self.frame_right_mid = Frame(self.frame_right, highlightbackground="black", highlightthickness=1)
+        self.frame_right_mid.place(relx=0, rely=0.1, relwidth=1, relheight=0.8)
+
 
     
     def evenement_entrer(self, event):
