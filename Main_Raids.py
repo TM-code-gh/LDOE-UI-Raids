@@ -90,7 +90,10 @@ class Raids(Frame):
         width = int(self.canvas_mid.winfo_width())-4
         height = int(self.canvas_mid.winfo_height())-4
 
-        #création ligne/Rectangle
+        self.canvas_mid.place(relx=0.01, rely=0.01, relheight='', relwidth='', width=int(self.canvas_mid.winfo_width()), height=int(self.canvas_mid.winfo_height()))
+        self.canvas_mid.update()
+
+        #Création ligne/Rectangle
         for y in range(1,20):
             for x in range(1,20):
                 x0 = (x)*(width/20)+2
@@ -98,32 +101,38 @@ class Raids(Frame):
                 x1 = (x+1)*(width/20)+2
                 y1 = (y+1)*(height/20)+2
 
-                # Rectangle
+                #Rectangle
                 if(x in range(13,17)) and (y in range(14, 19)):
                     #rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#EF9A9A', width=0)
                     rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='blue', width=0)
 
                 else:
                     if((x != 19) and (y != 19)):
-                        rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#8fbc8f', activefill="red", width=0)
-                        self.canvas_mid.tag_bind(rec, '<Button-1>', self.rec_click_event)
+                        rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#8fbc8f', width=0 , activefill="red", tag='rec')
+                        self.canvas_mid.tag_bind(rec, '<Button-1>', self.item_left_click)
+                        self.canvas_mid.tag_bind(rec, '<Enter>', self.evenement_entrer)
+                        self.canvas_mid.tag_bind(rec, '<Leave>', self.evenement_sortir)
 
-                # Ligne
+                #Ligne
                 if(x != 19): #Ne pas avoir la colonne de droite
                     if (x not in range(13,17)) or (y not in range(15,20)): #Ne pas avoir les lignes inconstructibles
                         #Horizontal 
-                        ligne = self.canvas_mid.create_line(x0,y0,x1,y0,dash=[2,4], fill="white", width=3, activefill='black', activewidth=6)
-                        self.canvas_mid.tag_bind(ligne, '<Button-1>', self.ligne_ckick_event)
+                        ligne_horizontale = self.canvas_mid.create_line(x0,y0,x1,y0, dash=[2,4], fill="white", width=3, activefill='black', activewidth=6, tag='ligne_horizontale')
+                        self.canvas_mid.tag_bind(ligne_horizontale, '<Button-1>', self.item_left_click)
+                        self.canvas_mid.tag_bind(ligne_horizontale, '<Enter>', self.evenement_entrer)
+                        self.canvas_mid.tag_bind(ligne_horizontale, '<Leave>', self.evenement_sortir)
                 
                 if(y != 19): #Ne pas avoir la ligne du bas
                     if (x not in range(14,17)) or (y not in range(14,20)): #Ne pas avoir les lignes inconstructibles
                         #Vertical
-                        ligne = self.canvas_mid.create_line(x0,y0,x0,y1,dash=[2,4], fill="white", width=3, activefill='black', activewidth=6)
-                        self.canvas_mid.tag_bind(ligne, '<Button-1>', self.ligne_ckick_event)
-
-
-
-
+                        ligne_verticale = self.canvas_mid.create_line(x0,y0,x0,y1,dash=[2,4], fill="white", width=3, activefill='black', activewidth=6, tag='ligne_verticale')
+                        self.canvas_mid.tag_bind(ligne_verticale, '<Button-1>', self.item_left_click)
+                        self.canvas_mid.tag_bind(ligne_verticale, '<Enter>', self.evenement_entrer)
+                        self.canvas_mid.tag_bind(ligne_verticale, '<Leave>', self.evenement_sortir)
+        
+        #Permet de passer l'objet et le type d'objet sélectionné
+        self.item = 'None'
+        self.item_type = 'None'
 
         #Inside right panel
         #Inside right top panel
@@ -137,38 +146,39 @@ class Raids(Frame):
         self.button_search_right.place(relx=0.35, rely=0.6)
 
     
-    def rec_click_event(self, event):
-        list_colors = ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C']
+    def evenement_entrer(self, event):
+        self.item = self.canvas_mid.find_closest(event.x, event.y)
+        self.item_type = self.canvas_mid.type(self.item)
+        #print("entrer:",self.item_type, '\n')
+
+    def evenement_sortir(self, event):
+        self.item = 'None'
+        self.item_type = 'None'
+
+
+    def item_left_click(self, event):
+        colors_rec = ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C']
+        colors_line = ['white','#E8A857','#AC8C6A','#5E534F','#795A4C']
+        colors_list=[]
         
-        item = event.widget.find_closest(event.x, event.y)
-        color = self.canvas_mid.itemcget(item, "fill")
-        ind_color = list_colors.index(color)
+        #print("click:",self.item_type)
 
-        if (ind_color==len(list_colors)-1):
+        if (self.item_type == "rectangle"):
+            colors_list = colors_rec
+        else:
+            colors_list = colors_line
+
+        color = self.canvas_mid.itemcget(self.item, "fill")
+        ind_color = colors_list.index(color)
+
+        if (ind_color==len(colors_list)-1):
             new_indice = 0
         else:
             new_indice = ind_color+1
 
-        self.canvas_mid.itemconfigure(item, fill=list_colors[new_indice])
+        self.canvas_mid.itemconfigure(self.item, fill=colors_list[new_indice])
+        
 
-
-    def ligne_ckick_event(self, event):
-        list_colors = ['white','#E8A857','#AC8C6A','#5E534F','#795A4C']
-
-        item = event.widget.find_closest(event.x, event.y)
-        print(item, 'ligne')
-        coord = self.canvas_mid.coords(item)
-        print('ligne x0', int(0.2+20*coord[0]/int(self.canvas_mid.winfo_width())))
-        print('ligne y0', int(0.2+20*coord[1]/int(self.canvas_mid.winfo_height())))
-        color = self.canvas_mid.itemcget(item, "fill")
-        ind_color = list_colors.index(color)
-
-        if (ind_color==len(list_colors)-1):
-            new_indice = 0
-        else:
-            new_indice = ind_color+1
-
-        self.canvas_mid.itemconfigure(item, fill=list_colors[new_indice])
 
 
 def main():
