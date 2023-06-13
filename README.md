@@ -26,7 +26,6 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
   - Tertiaire (frigo, entrepôt, ..) 
 - Lier barre de recherche dans _left_top_ avec la BDD de _left_mid_
 - Lier le texte dans la frame _mid_top_ et la table sélectionnée dans la BDD de _left_mid_
-- Modifier l'ancre des boutons **Chercher** dans les Frames _left_top_ et _right_top_ pour être au centre
 - Gestion de sauvegarde du "dessin" => Idée : Fichiers de configuration + BDD
 <br>
 
@@ -36,6 +35,7 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 ================================ 13/06/23 ==============================
 - Résolution du **MAJOR BUG** : Mauvaise détection de lignes et rectangles
 - Remplacement des 2 fonctions **rec_click_event(event)** et **ligne_click_event(event)** par une seule : **item_left_click(event)**
+- Modification de l'ancre des boutons **Chercher** dans les Frames _left_top_ et _right_top_ pour être au centre
 <br>
 
 ================================ 10-11/06/23 ==============================
