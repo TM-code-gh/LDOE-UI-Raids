@@ -149,7 +149,43 @@ class Raids(Frame):
         #Inside right mid panel
         self.frame_right_mid = Frame(self.frame_right, highlightbackground="black", highlightthickness=1)
         self.frame_right_mid.place(relx=0, rely=0.1, relwidth=1, relheight=0.8)
+        
+        #Button
+        self.frame_right_mid_buttons()
 
+
+
+    def frame_right_mid_buttons(self):
+        for widgets in self.frame_right_mid.winfo_children():
+            widgets.destroy()
+
+        Button(self.frame_right_mid, text="Tout", command=lambda :self.need_def("Tout")).place(x=0, y=0, relwidth=1, height=50)
+        Button(self.frame_right_mid, text="Sols & Murs", command=lambda :self.need_def("Sols & Murs")).place(x=0, y=50, relwidth=1, height=50)
+        Button(self.frame_right_mid, text="Sols", command=lambda :self.need_def("Sols")).place(x=0, y=100, relwidth=1, height=50)
+        Button(self.frame_right_mid, text="Murs", command=lambda :self.need_def("Murs")).place(x=0, y=150, relwidth=1, height=50)
+        Button(self.frame_right_mid, text="Stockages", command=lambda :self.need_def("Stockages")).place(x=0, y=200, relwidth=1, height=50)
+        Button(self.frame_right_mid, text="Établis", command=lambda :self.need_def("Établis")).place(x=0, y=250, relwidth=1, height=50)
+        Button(self.frame_right_mid, text="Décorations", command=lambda :self.need_def("Décorations")).place(x=0, y=300, relwidth=1, height=50)
+        Button(self.frame_right_mid, text="Autres", command=lambda :self.need_def("Autres")).place(x=0, y=350, relwidth=1, height=50)
+
+        """list_text = []
+        for x in self.frame_right_mid.winfo_children():
+            list_text.append(x.cget('text'))
+
+        print(list_text)"""
+
+
+    #FIXME
+    def need_def(self, button_txt):
+        print('clicked:', button_txt)   #print(x.cget('text'))
+
+        for widgets in self.frame_right_mid.winfo_children():
+            widgets['state'] = DISABLED #Désactive bouton
+            widgets.destroy()
+            
+
+        Button(self.frame_right_mid, text='<-', command=self.frame_right_mid_buttons).place(x=0, y=0, relwidth=0.25, height=40)
+        Label(self.frame_right_mid, text=button_txt, borderwidth=1, relief='solid').place(relx=0.25, y=0, relwidth=0.5, height=40)
 
     
     def evenement_entrer(self, event):
@@ -161,13 +197,10 @@ class Raids(Frame):
         self.item = 'None'
         self.item_type = 'None'
 
-
     def item_left_click(self, event):
         colors_rec = ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C']
         colors_line = ['white','#E8A857','#AC8C6A','#5E534F','#795A4C']
-        colors_list=[]
-        
-        #print("click:",self.item_type)
+        colors_list= []
 
         if (self.item_type == "rectangle"):
             colors_list = colors_rec
@@ -184,7 +217,7 @@ class Raids(Frame):
 
         self.canvas_mid.itemconfigure(self.item, fill=colors_list[new_indice])
         
-
+    
 
 
 def main():
