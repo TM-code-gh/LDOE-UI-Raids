@@ -17,7 +17,7 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
   - Connexe avec une fonction zoom in/out
   - Connexe avec une posibilité d'avoir des sides barres
 - Changement de l'aspect des sols (Images plutôt que couleurs)
-- Frame _right_mid_ avec boutons de sélections pour :
+- ~~Frame _right_mid_ avec boutons de sélections~~ pour :
   - Un niveau de sol/mur spécifique
   - Objets plaçables dans la base
 - Liste des objets :
@@ -31,6 +31,12 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 
 - Etendre l'application aux spécificités de la colonie
 <br>
+
+================================ 15/06/23 ==============================
+- Première version des boutons dans la _Frame_right_mid_ :
+  - Fonction de création des 8 boutons de sélections d'items
+  - Fonction de création d'un bouton retour + label avec le nom de la catégorie sélectionnée
+  - Dans les 2 fonctions => suppression de l'ensmble des items dans la frame correspondante (Voir si ce n'est pas mieux de cacher simplement) 
 
 ================================ 13/06/23 ==============================
 - Résolution du **MAJOR BUG** : Mauvaise détection de lignes et rectangles
