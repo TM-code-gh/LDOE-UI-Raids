@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, tix
 import mysql.connector
 
 import DB_access
@@ -156,6 +156,9 @@ class Raids(Frame):
 
 
     def frame_right_mid_buttons(self):
+        """
+        Création bouton dans la frame right mid
+        """
         for widgets in self.frame_right_mid.winfo_children():
             widgets.destroy()
 
@@ -177,6 +180,9 @@ class Raids(Frame):
 
     #FIXME
     def need_def(self, button_txt):
+        """
+        Spprime bouton + appelle fct creation bouton
+        """
         print('clicked:', button_txt)   #print(x.cget('text'))
 
         for widgets in self.frame_right_mid.winfo_children():
@@ -187,17 +193,63 @@ class Raids(Frame):
         Button(self.frame_right_mid, text='<-', command=self.frame_right_mid_buttons).place(x=0, y=0, relwidth=0.25, height=40)
         Label(self.frame_right_mid, text=button_txt, borderwidth=1, relief='solid').place(relx=0.25, y=0, relwidth=0.5, height=40)
 
+        self.create_button_dessin(button_txt)
+
+
+    def create_button_dessin(self, button_txt):
+        """
+        Creer bouton en fct du type d'objet voulu (sol/murs/stockages/...)
+        """
+
+        Label(self.frame_right_mid, text=button_txt).place(relx=0, y=50, relwidth=1, height=40)
+        Button(self.frame_right_mid, text='^^').place(relx=.80, y=17+50, relwidth=0.1, height=15)
+        Label(self.frame_right_mid, text='', borderwidth=1, relief="solid").place(relx=0, y=80, relwidth=1, height=2)
+
+        self.frame_mid_mid_sols = Frame(self.frame_right_mid, highlightbackground="black", highlightthickness=1).place(relx=0, y=80+1, relwidth=1, height=140)
+        
+        if(button_txt=='Sols'):
+            print('dessin sol')
+            
+            for k in range(6):
+                if (k < 3):
+                    Button(self.frame_right_mid, text='sol '+str(k)).place(relx=k/3, y=50+50, relwidth=0.25, height=40)
+                else:
+                    Button(self.frame_right_mid, text='sol '+str(k)).place(relx=(k-3)/3, y=100+50, relwidth=0.25, height=40)
+            """
+            Button(self.frame_right_mid, text='sol 0').place(relx=0, y=50+50, relwidth=0.25, height=40)
+            Button(self.frame_right_mid, text='sol 1').place(relx=1/3, y=50+50, relwidth=0.25, height=40)
+            Button(self.frame_right_mid, text='sol 2').place(relx=2/3, y=50+50, relwidth=0.25, height=40)
+            Button(self.frame_right_mid, text='sol 3').place(relx=0, y=100+50, relwidth=0.25, height=40)
+            Button(self.frame_right_mid, text='sol 4').place(relx=1/3, y=100+50, relwidth=0.25, height=40)
+            Button(self.frame_right_mid, text='sol 5').place(relx=2/3, y=100+50, relwidth=0.25, height=40)
+            """
+
+
     
     def evenement_entrer(self, event):
+        """
+        Entrer dans un nouveau type d'objet: rectange/ligne
+        """
+
         self.item = self.canvas_mid.find_closest(event.x, event.y)
         self.item_type = self.canvas_mid.type(self.item)
         #print("entrer:",self.item_type, '\n')
 
+    #Potentiellement non nécessaire
     def evenement_sortir(self, event):
+        """
+        Sortir d'un objet: rectange/ligne
+        """
+
         self.item = 'None'
         self.item_type = 'None'
 
     def item_left_click(self, event):
+        """
+        Clique gauche sur le canvas
+
+        Colore l'item actif
+        """
         colors_rec = ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C']
         colors_line = ['white','#E8A857','#AC8C6A','#5E534F','#795A4C']
         colors_list= []
