@@ -110,6 +110,7 @@ class Raids(Frame):
                     if((x != 19) and (y != 19)):
                         rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#8fbc8f', width=0 , activefill="red", tag='rec')
                         self.canvas_mid.tag_bind(rec, '<Button-1>', self.item_left_click)
+                        self.canvas_mid.tag_bind(rec, '<Button-3>', self.item_right_click)
                         self.canvas_mid.tag_bind(rec, '<Enter>', self.evenement_entrer)
                         self.canvas_mid.tag_bind(rec, '<Leave>', self.evenement_sortir)
 
@@ -119,6 +120,7 @@ class Raids(Frame):
                         #Horizontal 
                         ligne_horizontale = self.canvas_mid.create_line(x0,y0,x1,y0, dash=[2,4], fill="white", width=3, activefill='black', activewidth=6, tag='ligne_horizontale')
                         self.canvas_mid.tag_bind(ligne_horizontale, '<Button-1>', self.item_left_click)
+                        self.canvas_mid.tag_bind(ligne_horizontale, '<Button-3>', self.item_right_click)
                         self.canvas_mid.tag_bind(ligne_horizontale, '<Enter>', self.evenement_entrer)
                         self.canvas_mid.tag_bind(ligne_horizontale, '<Leave>', self.evenement_sortir)
                 
@@ -127,6 +129,7 @@ class Raids(Frame):
                         #Vertical
                         ligne_verticale = self.canvas_mid.create_line(x0,y0,x0,y1,dash=[2,4], fill="white", width=3, activefill='black', activewidth=6, tag='ligne_verticale')
                         self.canvas_mid.tag_bind(ligne_verticale, '<Button-1>', self.item_left_click)
+                        self.canvas_mid.tag_bind(ligne_verticale, '<Button-3>', self.item_right_click)
                         self.canvas_mid.tag_bind(ligne_verticale, '<Enter>', self.evenement_entrer)
                         self.canvas_mid.tag_bind(ligne_verticale, '<Leave>', self.evenement_sortir)
         
@@ -224,7 +227,6 @@ class Raids(Frame):
             Button(self.frame_right_mid, text='sol 5').place(relx=2/3, y=100+50, relwidth=0.25, height=40)
             """
 
-
     
     def evenement_entrer(self, event):
         """
@@ -244,6 +246,7 @@ class Raids(Frame):
         self.item = 'None'
         self.item_type = 'None'
 
+
     def item_left_click(self, event):
         """
         Clique gauche sur le canvas
@@ -252,7 +255,7 @@ class Raids(Frame):
         """
         colors_rec = ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C']
         colors_line = ['white','#E8A857','#AC8C6A','#5E534F','#795A4C']
-        colors_list= []
+        colors_list = []
 
         if (self.item_type == "rectangle"):
             colors_list = colors_rec
@@ -268,6 +271,33 @@ class Raids(Frame):
             new_indice = ind_color+1
 
         self.canvas_mid.itemconfigure(self.item, fill=colors_list[new_indice])
+
+
+    def item_right_click(self, event):
+        """
+        Clique droit sur le canvas
+
+        Colore l'item actif
+        """
+        colors_rec = ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C']
+        colors_line = ['white','#E8A857','#AC8C6A','#5E534F','#795A4C']
+        colors_list = []
+
+        if (self.item_type == "rectangle"):
+            colors_list = colors_rec
+        else:
+            colors_list = colors_line
+
+        color = self.canvas_mid.itemcget(self.item, "fill")
+        ind_color = colors_list.index(color)
+
+        if (ind_color==len(colors_list)+1):
+            new_indice = 0
+        else:
+            new_indice = ind_color-1
+
+        self.canvas_mid.itemconfigure(self.item, fill=colors_list[new_indice])
+        
         
     
 
