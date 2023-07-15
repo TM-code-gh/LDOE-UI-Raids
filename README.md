@@ -12,7 +12,6 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 
 
 <ins>**TODO**</ins>:
-- Création d'une fonction inverse à **item_left_click(event)**
 - Permettre un changement d'angle du canvas (orientation)
   - Connexe avec une fonction zoom in/out
   - Connexe avec une posibilité d'avoir des sides barres
@@ -35,6 +34,7 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 
 ================================ 15/07/23 ==============================
 - Première version de commentaires des fonctions implémentées
+- Création d'une fonction inverse à **item_left_click(event)**
 
 <br>
 
