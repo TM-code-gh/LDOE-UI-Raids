@@ -12,6 +12,7 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 
 
 <ins>**TODO**</ins>:
+- 
 - Permettre un changement d'angle du canvas (orientation)
   - Connexe avec une fonction zoom in/out
   - Connexe avec une posibilité d'avoir des sides barres
@@ -31,11 +32,14 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 - Etendre l'application aux spécificités de la colonie
 <br>
 
+================================ 17/07/23 ==============================
+- Suite débug du 15/07 de la _Frame_right_mid_
+<br>
 
 ================================ 15/07/23 ==============================
 - Première version de commentaires des fonctions implémentées
 - Création d'une fonction inverse à **item_left_click(event)**
-
+- Premier débug de la _Frame_right_mid_ pour un fonctionnement en switch de frame selon les boutons
 <br>
 
 ================================ 15/06/23 ==============================
