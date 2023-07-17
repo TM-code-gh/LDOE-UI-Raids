@@ -12,11 +12,7 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 
 
 <ins>**TODO**</ins>:
-- 
-- Permettre un changement d'angle du canvas (orientation)
-  - Connexe avec une fonction zoom in/out
-  - Connexe avec une posibilité d'avoir des sides barres
-- Changement de l'aspect des sols (Images plutôt que couleurs)
+- Changer le fonctionnement de la _Frame_right_mid_ en switch de Frames
 - ~~Frame _right_mid_ avec boutons de sélections~~ pour :
   - Un niveau de sol/mur spécifique
   - Objets plaçables dans la base
@@ -24,6 +20,10 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
   - Pricipaux (établis de base(craftable), coffres, ..)
   - Secondaire (décos craftables : table, fauteuille, ..)
   - Tertiaire (frigo, entrepôt, ..) 
+- Permettre un changement d'angle du canvas (orientation)
+  - Connexe avec une fonction zoom in/out
+  - Connexe avec une posibilité d'avoir des sides barres
+- Changement de l'aspect des sols (Images plutôt que couleurs)
 - Lier barre de recherche dans _left_top_ avec la BDD de _left_mid_
 - Lier le texte dans la frame _mid_top_ et la table sélectionnée dans la BDD de _left_mid_
 - Gestion de sauvegarde du "dessin" => Idée : Fichiers de configuration + BDD
