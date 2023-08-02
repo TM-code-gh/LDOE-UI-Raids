@@ -12,27 +12,50 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 
 
 <ins>**TODO**</ins>:
-- ~~Frame _right_mid_ avec boutons de sélections~~ pour :
-  - Un niveau de sol/mur spécifique
+- Faire correspondre les modifications de **item_left_click(event)** à **item_right_click(event)**
+- Trouver un moyen simple d'associer **frame_right_mid_principal()** et **frame_right_mid_principal_bis(from_frame)**
+- Boutons Reset pour reset le canvas
+- S'occuper du fonctionnement du bouton "wrap" d'une frame => Utilisable notamment pour les options ["Tout", "Sols & Murs"] et sûrment ["Craftable", "Non craftable"]
+- Frame _right_mid_ avec boutons de sélections pour:
   - Objets plaçables dans la base
-- Liste + PNG des objets :
+- PNG des objets:
   - Pricipaux (établis de base(craftable), coffres, ..)
   - Secondaire (décos craftables : table, fauteuille, ..)
   - Tertiaire (frigo, entrepôt, ..)
+- Lier barre de recherche dans _left_top_ avec la BDD de _left_mid_
+- Lier le texte dans la frame _mid_top_ et la table sélectionnée dans la BDD de _left_mid_
+- Gestion de sauvegarde du "dessin" => Idée : Fichiers de configuration + BDD
+- Boutons Sauvegarder/Valider?/Charger/Modifier/Ajouter/Supprimer en lien avec le canvas et la BDD
 - Changement de l'aspect des sols (Images plutôt que couleurs)
 - Permettre un changement d'angle du canvas (orientation)
   - Connexe avec une fonction zoom in/out
   - Connexe avec une posibilité d'avoir des sides barres
-- Lier barre de recherche dans _left_top_ avec la BDD de _left_mid_
-- Lier le texte dans la frame _mid_top_ et la table sélectionnée dans la BDD de _left_mid_
-- Gestion de sauvegarde du "dessin" => Idée : Fichiers de configuration + BDD
 <br>
 
-- Etendre l'application aux spécificités de la colonie
+- Étendre l'application aux spécificités de la colonie
+<br>
+
+=========================== ** -> 02/08/23 =============================
+<br> !!! MAJEUR UPDATE !!!
+                                
+- Création de listes/dictionnaires selon le type d'items: (sols/murs/stockages/etablis/decorations/autres)
+- MàJ des listes de couleurs des sols et murs (et ajout d'une couleur dans chacune) et stockage dans une variable
+- Refonte du fonctionnement de la _Frame_right_mid_:
+  - Définition des fonctions **frame_right_mid_principal()**, **frame_right_mid_principal_bis(from_frame)**, **frame_right_mid_secondary(button_txt)** 
+  - (Potentiellement revenir dessus pour n'avoir que 2 fcts)
+- Dans la fct **frame_right_mid_secondary(button_txt)**:
+  - Séparation des cas ["Tout", "Sols & Murs"] et le reste dans la méthode d'affichage (Affichage particulier)
+  - Définition des cas ["Sols", "Murs"] avec une frame et des boutons associées ##A MODIFIER
+- Défintion de la fonction **button_left_click_frame_right_mid_XXXX(name)**:
+  - Modifie l'état du bouton sur lequel l'utilisateur a cliqué
+  - De même pour le bouton précédent le cas échéant
+  - Associe la variable self.last au bouton actif et lui passe un name
+- MàJ de la fct **item_left_click(event)**:
+  - Test si un bouton est actif (enclenché) et agit en conséquence
 <br>
 
 ================================ 18/07/23 ==============================
-- Changer le fonctionnement de la _Frame_right_mid_ en switch de Frames
+- Redéfinition du fonctionnement de la _Frame_right_mid_
 <br>
 
 ================================ 17/07/23 ==============================
