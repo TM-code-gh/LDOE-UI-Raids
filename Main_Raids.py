@@ -93,6 +93,10 @@ class Raids(Frame):
         self.canvas_mid.place(relx=0.01, rely=0.01, relheight='', relwidth='', width=int(self.canvas_mid.winfo_width()), height=int(self.canvas_mid.winfo_height()))
         self.canvas_mid.update()
 
+        #Couleur des rectangles et lignes
+        self.colors_rec = ['#8fbc8f','#E8A857','#E8E857','#ADADAA','#5E534F','#795A4C']
+        self.colors_line = ['white','#E8A857','#E8E857','#ADADAA','#5E534F','#795A4C']
+
         #Création ligne/Rectangle
         for y in range(1,20):
             for x in range(1,20):
@@ -150,89 +154,123 @@ class Raids(Frame):
         self.button_search_right.place(relx=0.5, rely=0.75, anchor=CENTER)
 
         #Inside right mid panel
-        self.frame_right_mid = Frame(self.frame_right, highlightbackground="black", highlightthickness=1)
+        self.frame_right_mid = self.frame_right_mid_principal_bis(self.frame_right)
         self.frame_right_mid.place(relx=0, rely=0.1, relwidth=1, relheight=0.8)
         
-        #Button
-        self.frame_right_mid_buttons()
+        self.list_sols = ["Sans sol", "T1", "T2", "T3", "T4", "T5"]
+        self.list_murs = ["Sans murs", "T1", "T2", "T3", "T4", "T5"]
+        self.list_stockages = {"Craftable":["Petite boîte", "coffre", "malle", "Râtelier (lvl X)"], 
+                          "Non craftable":["Coffre-fort","Entrepôt", "Réfrigérateur", "Une autre tournée", "Triomphe", "Armoire pharmacie", "Étagère", "Dépôt déchets",
+                                           "Boîte compartimenté", "Caisse élec"]}
+        
+        self.list_etablis = {"Craftable":["Feu de camp", "Potager", "Établi Bois", "Fourneau", "Collecteur pluie", "Chevalet tannage", "Séchoir viande", "Table pierre",
+                                     "Cuisinière", "Établi armes", "Table couture", "Établi (Plaque)", "Recycleur", "Table médicale", "Fourneau raffiné","Pompe manuelle",
+                                     "Presse", "Labo élec", "Station chimie", "Système Hydroponique"], 
+                        "Non craftable":["Goût sûr"]}
+        
+        self.list_decorations = {"Craftable":["Plante d/'intérieur", "Table", "Canapé douillet", "lampradaire", "Lit comfortable", "Mangeoire", "Râtelier armes", "Épicéa",
+                                        "Parterre fleurs pneu", "Bain fleurs", "Étang décoratif", "Sculpture"], 
+                            "Non craftable":["Mannequin", "Hologramme", "Gramophone", "Tête sorcière"]}
+        
+        self.list_autres = {"Craftable":["Radios", "Chopper", "Douche", "Piège piques", "Cage chien", "Garage", "Garde-robe", "Miroir", "Piège fil", "Fil barbelé",
+                                    "Générateur élec", "Bain acide", "Bateau moteur", "ATV", "Tourelle", "Drone station", "Établi up drone", "Toilettes exté"],
+                        "Non craftable":["Pompe"]}
 
 
-
-    def frame_right_mid_buttons(self):
+    def clear_frame(self, frame):
         """
-        Création bouton dans la frame right mid
+        Supprime tous les éléments d'une Frame
         """
-        for widgets in self.frame_right_mid.winfo_children():
+        for widgets in frame.winfo_children():
             widgets.destroy()
 
-        Button(self.frame_right_mid, text="Tout", command=lambda :self.need_def("Tout")).place(x=0, y=0, relwidth=1, height=50)
-        Button(self.frame_right_mid, text="Sols & Murs", command=lambda :self.need_def("Sols & Murs")).place(x=0, y=50, relwidth=1, height=50)
-        Button(self.frame_right_mid, text="Sols", command=lambda :self.need_def("Sols")).place(x=0, y=100, relwidth=1, height=50)
-        Button(self.frame_right_mid, text="Murs", command=lambda :self.need_def("Murs")).place(x=0, y=150, relwidth=1, height=50)
-        Button(self.frame_right_mid, text="Stockages", command=lambda :self.need_def("Stockages")).place(x=0, y=200, relwidth=1, height=50)
-        Button(self.frame_right_mid, text="Établis", command=lambda :self.need_def("Établis")).place(x=0, y=250, relwidth=1, height=50)
-        Button(self.frame_right_mid, text="Décorations", command=lambda :self.need_def("Décorations")).place(x=0, y=300, relwidth=1, height=50)
-        Button(self.frame_right_mid, text="Autres", command=lambda :self.need_def("Autres")).place(x=0, y=350, relwidth=1, height=50)
-
-        """list_text = []
-        for x in self.frame_right_mid.winfo_children():
-            list_text.append(x.cget('text'))
-
-        print(list_text)"""
-
-
-    #FIXME
-    def need_def(self, button_txt):
+    #FIXME  => REGROUPER PRINCIPAL et PRINCIPAL BIS: Use try/except?
+    def frame_right_mid_principal(self):
         """
-        Spprime bouton + appelle fct creation bouton
+        Création de la frame right mid principale
         """
-        print('clicked:', button_txt)   #print(x.cget('text'))
+        self.clear_frame(self.frame_right_mid)
+        try:
+            del self.last #Supprime la variable qui représente le dernier bouton sélectionné de la frame frame_right_mid_XXX
+        except:
+            pass
 
-        for widgets in self.frame_right_mid.winfo_children():
-            widgets['state'] = DISABLED #Désactive bouton
-            widgets.destroy()
-            
+        self.frame_right_mid = self.frame_right_mid_principal_bis(self.frame_right)
+        self.frame_right_mid.place(relx=0, rely=0.1, relwidth=1, relheight=0.8)
+    
+    def frame_right_mid_principal_bis(self, from_frame):
+        """
+        Création des boutons dans la frame right mid principale
+        """        
+        frame = Frame(from_frame, highlightbackground="black", highlightthickness=1)
 
-        Button(self.frame_right_mid, text='<-', command=self.frame_right_mid_buttons).place(x=0, y=0, relwidth=0.25, height=40)
+        Button(frame, text="Tout", command=lambda :self.frame_right_mid_secondary("Tout")).place(x=0, y=0, relwidth=1, height=50)
+        Button(frame, text="Sols & Murs", command=lambda :self.frame_right_mid_secondary("Sols & Murs")).place(x=0, y=50, relwidth=1, height=50)
+        Button(frame, text="Sols", command=lambda :self.frame_right_mid_secondary("Sols")).place(x=0, y=100, relwidth=1, height=50)
+        Button(frame, text="Murs", command=lambda :self.frame_right_mid_secondary("Murs")).place(x=0, y=150, relwidth=1, height=50)
+        Button(frame, text="Stockages", command=lambda :self.frame_right_mid_secondary("Stockages")).place(x=0, y=200, relwidth=1, height=50)
+        Button(frame, text="Établis", command=lambda :self.frame_right_mid_secondary("Établis")).place(x=0, y=250, relwidth=1, height=50)
+        Button(frame, text="Décorations", command=lambda :self.frame_right_mid_secondary("Décorations")).place(x=0, y=300, relwidth=1, height=50)
+        Button(frame, text="Autres", command=lambda :self.frame_right_mid_secondary("Autres")).place(x=0, y=350, relwidth=1, height=50)
+
+        return frame
+
+    def frame_right_mid_secondary(self, button_txt):
+        """
+        Création bouton dans la frame right mid principale
+        """
+        
+        self.clear_frame(self.frame_right_mid)
+        try:
+            del self.last #Supprime la variable qui représente le dernier bouton sélectionné de la frame frame_right_mid_XXX
+        except:
+            pass
+
+        Button(self.frame_right_mid, text='<-', command=self.frame_right_mid_principal).place(x=0, y=0, relwidth=0.25, height=40)
         Label(self.frame_right_mid, text=button_txt, borderwidth=1, relief='solid').place(relx=0.25, y=0, relwidth=0.5, height=40)
 
-        self.create_button_dessin(button_txt)
+        if(button_txt!="Tout" and button_txt!="Sols & Murs"):
+            Label(self.frame_right_mid, text=button_txt).place(relx=0, y=50, relwidth=1, height=40)
+            Button(self.frame_right_mid, text='^^').place(relx=.80, y=17+50, relwidth=0.1, height=15)
+            Label(self.frame_right_mid, text='', borderwidth=1, relief="solid").place(relx=0, y=80, relwidth=1, height=2)
 
+            if(button_txt=='Sols') or (button_txt=='Murs'):
+                relwidth = 0.25     # Largeur des boutons
+                x = relwidth/(2*3)  # Position x des boutons
+                y = 25              # Position y des boutons
+                height = 40         # Hauteur des boutons
+                
+                self.frame_right_mid_sols = Frame(self.frame_right_mid, highlightbackground="red", highlightthickness=3)
+                self.frame_right_mid_sols.place(relx=0, y=80+1, relwidth=1, height=150)
 
-    def create_button_dessin(self, button_txt):
-        """
-        Creer bouton en fct du type d'objet voulu (sol/murs/stockages/...)
-        """
+                if(button_txt=='Sols'):
+                    Button(self.frame_right_mid_sols, text=self.list_sols[0], name='sols '+self.list_sols[0], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[0])).place(relx=0+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_sols, text=self.list_sols[1], name='sols '+self.list_sols[1], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[1])).place(relx=1/3+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_sols, text=self.list_sols[2], name='sols '+self.list_sols[2], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[2])).place(relx=2/3+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_sols, text=self.list_sols[3], name='sols '+self.list_sols[3], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[3])).place(relx=0+x, y=y+50, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_sols, text=self.list_sols[4], name='sols '+self.list_sols[4], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[4])).place(relx=1/3+x, y=y+50, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_sols, text=self.list_sols[5], name='sols '+self.list_sols[5], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[5])).place(relx=2/3+x, y=y+50, relwidth=relwidth, height=height)
 
-        Label(self.frame_right_mid, text=button_txt).place(relx=0, y=50, relwidth=1, height=40)
-        Button(self.frame_right_mid, text='^^').place(relx=.80, y=17+50, relwidth=0.1, height=15)
-        Label(self.frame_right_mid, text='', borderwidth=1, relief="solid").place(relx=0, y=80, relwidth=1, height=2)
-
-        self.frame_mid_mid_sols = Frame(self.frame_right_mid, highlightbackground="black", highlightthickness=1).place(relx=0, y=80+1, relwidth=1, height=140)
-        
-        if(button_txt=='Sols'):
-            print('dessin sol')
-            
-            for k in range(6):
-                if (k < 3):
-                    Button(self.frame_right_mid, text='sol '+str(k)).place(relx=k/3, y=50+50, relwidth=0.25, height=40)
                 else:
-                    Button(self.frame_right_mid, text='sol '+str(k)).place(relx=(k-3)/3, y=100+50, relwidth=0.25, height=40)
-            """
-            Button(self.frame_right_mid, text='sol 0').place(relx=0, y=50+50, relwidth=0.25, height=40)
-            Button(self.frame_right_mid, text='sol 1').place(relx=1/3, y=50+50, relwidth=0.25, height=40)
-            Button(self.frame_right_mid, text='sol 2').place(relx=2/3, y=50+50, relwidth=0.25, height=40)
-            Button(self.frame_right_mid, text='sol 3').place(relx=0, y=100+50, relwidth=0.25, height=40)
-            Button(self.frame_right_mid, text='sol 4').place(relx=1/3, y=100+50, relwidth=0.25, height=40)
-            Button(self.frame_right_mid, text='sol 5').place(relx=2/3, y=100+50, relwidth=0.25, height=40)
-            """
+                    Button(self.frame_right_mid_sols, text=self.list_murs[0], name='murs '+self.list_murs[0], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[0])).place(relx=0+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_sols, text=self.list_murs[1], name='murs '+self.list_murs[1], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[1])).place(relx=1/3+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_sols, text=self.list_murs[2], name='murs '+self.list_murs[2], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[2])).place(relx=2/3+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_sols, text=self.list_murs[3], name='murs '+self.list_murs[3], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[3])).place(relx=0+x, y=y+50, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_sols, text=self.list_murs[4], name='murs '+self.list_murs[4], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[4])).place(relx=1/3+x, y=y+50, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_sols, text=self.list_murs[5], name='murs '+self.list_murs[5], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[5])).place(relx=2/3+x, y=y+50, relwidth=relwidth, height=height)
 
+        else:
+            raise NameError
     
+
+
+        print('clicked:', button_txt)
+
+
     def evenement_entrer(self, event):
         """
         Entrer dans un nouveau type d'objet: rectange/ligne
         """
-
         self.item = self.canvas_mid.find_closest(event.x, event.y)
         self.item_type = self.canvas_mid.type(self.item)
         #print("entrer:",self.item_type, '\n')
@@ -242,34 +280,51 @@ class Raids(Frame):
         """
         Sortir d'un objet: rectange/ligne
         """
-
         self.item = 'None'
         self.item_type = 'None'
-
 
     def item_left_click(self, event):
         """
         Clique gauche sur le canvas
 
-        Colore l'item actif
+        Colore l'item actif en fct du bouton cliqué
         """
-        colors_rec = ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C']
-        colors_line = ['white','#E8A857','#AC8C6A','#5E534F','#795A4C']
         colors_list = []
+        flag = False
 
-        if (self.item_type == "rectangle"):
-            colors_list = colors_rec
+        try:
+            self.last #test si la variable qui représente le dernier bouton sélectionné de la frame frame_right_mid_XXX existe (= bouton appuyé)
+        except:
+            flag = True
+        
+        if(flag):
+            if (self.item_type == "rectangle"):
+                colors_list = self.colors_rec
+            else:
+                colors_list = self.colors_line
+
+            color = self.canvas_mid.itemcget(self.item, "fill")
+            ind_color = colors_list.index(color)
+
+            if (ind_color==len(colors_list)-1):
+                new_indice = 0
+            else:
+                new_indice = ind_color+1
+            
         else:
-            colors_list = colors_line
+            name=self.last.name
+            names=name.split(" ",1)
 
-        color = self.canvas_mid.itemcget(self.item, "fill")
-        ind_color = colors_list.index(color)
+            if(names[0] == 'sols') and (self.item_type == "rectangle"):
+                colors_list = self.colors_rec
+                new_indice = self.list_sols.index(names[1])
+            elif(names[0] == 'murs') and (self.item_type == "line"):
+                colors_list = self.colors_line
+                new_indice = self.list_murs.index(names[1])
+            else:
+                return False
 
-        if (ind_color==len(colors_list)-1):
-            new_indice = 0
-        else:
-            new_indice = ind_color+1
-
+            
         self.canvas_mid.itemconfigure(self.item, fill=colors_list[new_indice])
 
 
@@ -279,14 +334,12 @@ class Raids(Frame):
 
         Colore l'item actif
         """
-        colors_rec = ['#8fbc8f','#E8A857','#AC8C6A','#5E534F','#795A4C']
-        colors_line = ['white','#E8A857','#AC8C6A','#5E534F','#795A4C']
         colors_list = []
 
         if (self.item_type == "rectangle"):
-            colors_list = colors_rec
+            colors_list = self.colors_rec
         else:
-            colors_list = colors_line
+            colors_list = self.colors_line
 
         color = self.canvas_mid.itemcget(self.item, "fill")
         ind_color = colors_list.index(color)
@@ -298,7 +351,22 @@ class Raids(Frame):
 
         self.canvas_mid.itemconfigure(self.item, fill=colors_list[new_indice])
         
-        
+    
+    def button_left_click_frame_right_mid_XXXX(self, name):
+        """
+        Clique gauche sur un bouton de la frame_right_mid_XXXX
+        """
+        try:
+            self.last.config(relief=RAISED, state='normal') #test si la variable qui représente le dernier bouton sélectionné de la frame frame_right_mid_XXX est configurable (donc existe)
+        except:
+            pass
+
+        butt = self.frame_right_mid_sols.nametowidget(name)
+        butt.config(relief=SUNKEN, state='disabled')
+
+        self.last = butt
+        self.last.name=name
+
     
 
 
