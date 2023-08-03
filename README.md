@@ -16,8 +16,6 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 - Trouver un moyen simple d'associer **frame_right_mid_principal()** et **frame_right_mid_principal_bis(from_frame)**
 - Boutons Reset pour reset le canvas
 - S'occuper du fonctionnement du bouton "wrap" d'une frame => Utilisable notamment pour les options ["Tout", "Sols & Murs"] et sûrment ["Craftable", "Non craftable"]
-- Frame _right_mid_ avec boutons de sélections pour:
-  - Objets plaçables dans la base
 - PNG des objets:
   - Pricipaux (établis de base(craftable), coffres, ..)
   - Secondaire (décos craftables : table, fauteuille, ..)
@@ -33,6 +31,11 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 <br>
 
 - Étendre l'application aux spécificités de la colonie
+<br>
+
+================================ 03/08/23 ==============================
+
+- Ajout des cas d'usages: 'Stockages', 'Établis', 'Décorations' et 'Autres' dans **frame_right_mid_secondary(button_txt)**
 <br>
 
 =========================== ** -> 02/08/23 =============================
