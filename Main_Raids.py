@@ -159,7 +159,7 @@ class Raids(Frame):
         
         self.list_sols = ["Sans sol", "T1", "T2", "T3", "T4", "T5"]
         self.list_murs = ["Sans murs", "T1", "T2", "T3", "T4", "T5"]
-        self.list_stockages = {"Craftable":["Petite boîte", "coffre", "malle", "Râtelier (lvl X)"], 
+        self.list_stockages = {"Craftable":["Petite boîte", "Coffre", "Malle", "Râtelier (lvl X)"], 
                           "Non craftable":["Coffre-fort","Entrepôt", "Réfrigérateur", "Une autre tournée", "Triomphe", "Armoire pharmacie", "Étagère", "Dépôt déchets",
                                            "Boîte compartimenté", "Caisse élec"]}
         
@@ -168,13 +168,15 @@ class Raids(Frame):
                                      "Presse", "Labo élec", "Station chimie", "Système Hydroponique"], 
                         "Non craftable":["Goût sûr"]}
         
-        self.list_decorations = {"Craftable":["Plante d/'intérieur", "Table", "Canapé douillet", "lampradaire", "Lit comfortable", "Mangeoire", "Râtelier armes", "Épicéa",
+        self.list_decorations = {"Craftable":["Plante d'intérieur", "Table", "Canapé douillet", "lampadaire", "Lit comfortable", "Mangeoire", "Râtelier armes", "Épicéa",
                                         "Parterre fleurs pneu", "Bain fleurs", "Étang décoratif", "Sculpture"], 
                             "Non craftable":["Mannequin", "Hologramme", "Gramophone", "Tête sorcière"]}
         
         self.list_autres = {"Craftable":["Radios", "Chopper", "Douche", "Piège piques", "Cage chien", "Garage", "Garde-robe", "Miroir", "Piège fil", "Fil barbelé",
                                     "Générateur élec", "Bain acide", "Bateau moteur", "ATV", "Tourelle", "Drone station", "Établi up drone", "Toilettes exté"],
                         "Non craftable":["Pompe"]}
+
+        self.list_all =[self.list_sols, self.list_murs, self.list_stockages, self.list_etablis, self.list_decorations, self.list_autres]
 
 
     def clear_frame(self, frame):
@@ -231,8 +233,10 @@ class Raids(Frame):
 
         if(button_txt!="Tout" and button_txt!="Sols & Murs"):
             Label(self.frame_right_mid, text=button_txt).place(relx=0, y=50, relwidth=1, height=40)
-            Button(self.frame_right_mid, text='^^').place(relx=.80, y=17+50, relwidth=0.1, height=15)
+            Button(self.frame_right_mid, text='^^').place(relx=.80, y=17+50, relwidth=0.1, height=15) #FIXME command => fct
             Label(self.frame_right_mid, text='', borderwidth=1, relief="solid").place(relx=0, y=80, relwidth=1, height=2)
+
+            self.frame_right_mid_XXX = Frame(self.frame_right_mid, highlightbackground="red", highlightthickness=3)
 
             if(button_txt=='Sols') or (button_txt=='Murs'):
                 relwidth = 0.25     # Largeur des boutons
@@ -240,24 +244,79 @@ class Raids(Frame):
                 y = 25              # Position y des boutons
                 height = 40         # Hauteur des boutons
                 
-                self.frame_right_mid_sols = Frame(self.frame_right_mid, highlightbackground="red", highlightthickness=3)
-                self.frame_right_mid_sols.place(relx=0, y=80+1, relwidth=1, height=150)
+                self.frame_right_mid_XXX.place(relx=0, y=80+1, relwidth=1, height=150)
 
                 if(button_txt=='Sols'):
-                    Button(self.frame_right_mid_sols, text=self.list_sols[0], name='sols '+self.list_sols[0], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[0])).place(relx=0+x, y=y, relwidth=relwidth, height=height)
-                    Button(self.frame_right_mid_sols, text=self.list_sols[1], name='sols '+self.list_sols[1], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[1])).place(relx=1/3+x, y=y, relwidth=relwidth, height=height)
-                    Button(self.frame_right_mid_sols, text=self.list_sols[2], name='sols '+self.list_sols[2], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[2])).place(relx=2/3+x, y=y, relwidth=relwidth, height=height)
-                    Button(self.frame_right_mid_sols, text=self.list_sols[3], name='sols '+self.list_sols[3], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[3])).place(relx=0+x, y=y+50, relwidth=relwidth, height=height)
-                    Button(self.frame_right_mid_sols, text=self.list_sols[4], name='sols '+self.list_sols[4], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[4])).place(relx=1/3+x, y=y+50, relwidth=relwidth, height=height)
-                    Button(self.frame_right_mid_sols, text=self.list_sols[5], name='sols '+self.list_sols[5], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[5])).place(relx=2/3+x, y=y+50, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_sols[0], name='sols '+self.list_sols[0], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[0])).place(relx=0+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_sols[1], name='sols '+self.list_sols[1], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[1])).place(relx=1/3+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_sols[2], name='sols '+self.list_sols[2], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[2])).place(relx=2/3+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_sols[3], name='sols '+self.list_sols[3], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[3])).place(relx=0+x, y=y+50, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_sols[4], name='sols '+self.list_sols[4], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[4])).place(relx=1/3+x, y=y+50, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_sols[5], name='sols '+self.list_sols[5], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='sols '+self.list_sols[5])).place(relx=2/3+x, y=y+50, relwidth=relwidth, height=height)
 
                 else:
-                    Button(self.frame_right_mid_sols, text=self.list_murs[0], name='murs '+self.list_murs[0], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[0])).place(relx=0+x, y=y, relwidth=relwidth, height=height)
-                    Button(self.frame_right_mid_sols, text=self.list_murs[1], name='murs '+self.list_murs[1], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[1])).place(relx=1/3+x, y=y, relwidth=relwidth, height=height)
-                    Button(self.frame_right_mid_sols, text=self.list_murs[2], name='murs '+self.list_murs[2], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[2])).place(relx=2/3+x, y=y, relwidth=relwidth, height=height)
-                    Button(self.frame_right_mid_sols, text=self.list_murs[3], name='murs '+self.list_murs[3], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[3])).place(relx=0+x, y=y+50, relwidth=relwidth, height=height)
-                    Button(self.frame_right_mid_sols, text=self.list_murs[4], name='murs '+self.list_murs[4], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[4])).place(relx=1/3+x, y=y+50, relwidth=relwidth, height=height)
-                    Button(self.frame_right_mid_sols, text=self.list_murs[5], name='murs '+self.list_murs[5], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[5])).place(relx=2/3+x, y=y+50, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_murs[0], name='murs '+self.list_murs[0], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[0])).place(relx=0+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_murs[1], name='murs '+self.list_murs[1], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[1])).place(relx=1/3+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_murs[2], name='murs '+self.list_murs[2], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[2])).place(relx=2/3+x, y=y, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_murs[3], name='murs '+self.list_murs[3], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[3])).place(relx=0+x, y=y+50, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_murs[4], name='murs '+self.list_murs[4], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[4])).place(relx=1/3+x, y=y+50, relwidth=relwidth, height=height)
+                    Button(self.frame_right_mid_XXX, text=self.list_murs[5], name='murs '+self.list_murs[5], command=lambda :self.button_left_click_frame_right_mid_XXXX(name='murs '+self.list_murs[5])).place(relx=2/3+x, y=y+50, relwidth=relwidth, height=height)
+
+            else:
+                relwidth = .40      # Largeur des boutons
+                x = 0.05            # Position x du premier bouton de départ
+                y = 30              # Position y du premier bouton de départ
+                height = 20         # Hauteur des boutons
+
+                # Gauche
+                Label(self.frame_right_mid_XXX, text='Non craftable', font=('Helvetica 11 underline')).place(relx=0, y=10, relwidth=relwidth, height=height)
+                #Droite
+                Label(self.frame_right_mid_XXX, text='Craftable', font=('Helvetica 11 underline')).place(relx=x+relwidth, y=10, relwidth=relwidth, height=height)
+
+                if(button_txt=='Stockages'):
+                    self.frame_right_mid_XXX.place(relx=0, y=80+1, relwidth=1, height=max([len(self.list_stockages['Non craftable']),len(self.list_stockages['Craftable'])])*20+50)
+
+                    for k in range (len(self.list_stockages['Non craftable'])):
+                        Button(self.frame_right_mid_XXX, text=self.list_stockages['Non craftable'][k], name='stockages ' +self.list_stockages['Non craftable'][k], anchor="w",
+                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='stockages ' +self.list_stockages['Non craftable'][k])).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+
+                    for k in range (len(self.list_stockages['Craftable'])):
+                        Button(self.frame_right_mid_XXX, text=self.list_stockages['Craftable'][k], name='stockages ' +self.list_stockages['Craftable'][k],  anchor="w",
+                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='stockages ' +self.list_stockages['Craftable'][k])).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
+                
+                elif(button_txt=='Établis'):
+                    self.frame_right_mid_XXX.place(relx=0, y=80+1, relwidth=1, height=max([len(self.list_etablis['Non craftable']),len(self.list_etablis['Craftable'])])*20+50)
+
+                    for k in range (len(self.list_etablis['Non craftable'])):
+                        Button(self.frame_right_mid_XXX, text=self.list_etablis['Non craftable'][k], name='établis ' +self.list_etablis['Non craftable'][k], anchor="w",
+                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='établis ' +self.list_etablis['Non craftable'][k])).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+
+                    for k in range (len(self.list_etablis['Craftable'])):
+                        Button(self.frame_right_mid_XXX, text=self.list_etablis['Craftable'][k], name='établis ' +self.list_etablis['Craftable'][k],  anchor="w",
+                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='établis ' +self.list_etablis['Craftable'][k])).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
+                
+                elif(button_txt=='Décorations'):
+                    self.frame_right_mid_XXX.place(relx=0, y=80+1, relwidth=1, height=max([len(self.list_decorations['Non craftable']),len(self.list_decorations['Craftable'])])*20+50)
+
+                    for k in range (len(self.list_decorations['Non craftable'])):
+                        Button(self.frame_right_mid_XXX, text=self.list_decorations['Non craftable'][k], name='décorations ' +self.list_decorations['Non craftable'][k], anchor="w",
+                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='décorations ' +self.list_decorations['Non craftable'][k])).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+
+                    for k in range (len(self.list_decorations['Craftable'])):
+                        Button(self.frame_right_mid_XXX, text=self.list_decorations['Craftable'][k], name='décorations ' +self.list_decorations['Craftable'][k],  anchor="w",
+                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='décorations ' +self.list_decorations['Craftable'][k])).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
+                
+                elif(button_txt=='Autres'):
+                    self.frame_right_mid_XXX.place(relx=0, y=80+1, relwidth=1, height=max([len(self.list_autres['Non craftable']),len(self.list_autres['Craftable'])])*20+50)
+
+                    for k in range (len(self.list_autres['Non craftable'])):
+                        Button(self.frame_right_mid_XXX, text=self.list_autres['Non craftable'][k], name='autres ' +self.list_autres['Non craftable'][k], anchor="w",
+                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='autres ' +self.list_autres['Non craftable'][k])).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+
+                    for k in range (len(self.list_autres['Craftable'])):
+                        Button(self.frame_right_mid_XXX, text=self.list_autres['Craftable'][k], name='autres ' +self.list_autres['Craftable'][k],  anchor="w",
+                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='autres ' +self.list_autres['Craftable'][k])).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
+                
 
         else:
             raise NameError
@@ -327,7 +386,6 @@ class Raids(Frame):
             
         self.canvas_mid.itemconfigure(self.item, fill=colors_list[new_indice])
 
-
     def item_right_click(self, event):
         """
         Clique droit sur le canvas
@@ -350,7 +408,6 @@ class Raids(Frame):
             new_indice = ind_color-1
 
         self.canvas_mid.itemconfigure(self.item, fill=colors_list[new_indice])
-        
     
     def button_left_click_frame_right_mid_XXXX(self, name):
         """
@@ -361,7 +418,9 @@ class Raids(Frame):
         except:
             pass
 
-        butt = self.frame_right_mid_sols.nametowidget(name)
+        butt = self.frame_right_mid_XXX.nametowidget(name)
+        names=name.split(" ",1)
+        print(names)
         butt.config(relief=SUNKEN, state='disabled')
 
         self.last = butt
