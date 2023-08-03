@@ -27,17 +27,14 @@ class Raids(Frame):
         
 
         #Left panel
-        #frame_left = Frame(background='red')
         self.frame_left = Frame()
         self.frame_left.place(relx=0, rely=0, relwidth=0.15, relheight=1)
 
         #Mid panel
-        #frame_mid = Frame(background="green")
         self.frame_mid = Frame()
         self.frame_mid.place(relx=0.15, rely=0, relwidth=0.60, relheight=1)
 
         #Right panel
-        #frame_right = Frame(background='blue')
         self.frame_right = Frame()
         self.frame_right.place(relx=0.75, rely=0, relwidth=0.25, relheight=1)
 
@@ -84,58 +81,19 @@ class Raids(Frame):
         self.frame_mid_mid.place(relx=0, rely=0.1, relwidth=1, relheight=0.8)
 
         self.canvas_mid = Canvas(self.frame_mid_mid, bg='dark sea green')
+        #Hauteur/Largeur relative
         self.canvas_mid.place(relx=0.01, rely=0.01, relheight=0.98, relwidth=0.98)
-
         self.canvas_mid.update()
-        width = int(self.canvas_mid.winfo_width())-4
-        height = int(self.canvas_mid.winfo_height())-4
 
+        #Hauteur/Largeur en dure
         self.canvas_mid.place(relx=0.01, rely=0.01, relheight='', relwidth='', width=int(self.canvas_mid.winfo_width()), height=int(self.canvas_mid.winfo_height()))
         self.canvas_mid.update()
 
-        #Couleur des rectangles et lignes
+        #Couleur des rectangles et lignes pour le canvas
         self.colors_rec = ['#8fbc8f','#E8A857','#E8E857','#ADADAA','#5E534F','#795A4C']
         self.colors_line = ['white','#E8A857','#E8E857','#ADADAA','#5E534F','#795A4C']
 
-        #Création ligne/Rectangle
-        for y in range(1,20):
-            for x in range(1,20):
-                x0 = (x)*(width/20)+2
-                y0 = (y)*(height/20)+2
-                x1 = (x+1)*(width/20)+2
-                y1 = (y+1)*(height/20)+2
-
-                #Rectangle
-                if(x in range(13,17)) and (y in range(14, 19)):
-                    #rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#EF9A9A', width=0)
-                    rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='blue', width=0)
-
-                else:
-                    if((x != 19) and (y != 19)):
-                        rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#8fbc8f', width=0 , activefill="red", tag='rec')
-                        self.canvas_mid.tag_bind(rec, '<Button-1>', self.item_left_click)
-                        self.canvas_mid.tag_bind(rec, '<Button-3>', self.item_right_click)
-                        self.canvas_mid.tag_bind(rec, '<Enter>', self.evenement_entrer)
-                        self.canvas_mid.tag_bind(rec, '<Leave>', self.evenement_sortir)
-
-                #Ligne
-                if(x != 19): #Ne pas avoir la colonne de droite
-                    if (x not in range(13,17)) or (y not in range(15,20)): #Ne pas avoir les lignes inconstructibles
-                        #Horizontal 
-                        ligne_horizontale = self.canvas_mid.create_line(x0,y0,x1,y0, dash=[2,4], fill="white", width=3, activefill='black', activewidth=6, tag='ligne_horizontale')
-                        self.canvas_mid.tag_bind(ligne_horizontale, '<Button-1>', self.item_left_click)
-                        self.canvas_mid.tag_bind(ligne_horizontale, '<Button-3>', self.item_right_click)
-                        self.canvas_mid.tag_bind(ligne_horizontale, '<Enter>', self.evenement_entrer)
-                        self.canvas_mid.tag_bind(ligne_horizontale, '<Leave>', self.evenement_sortir)
-                
-                if(y != 19): #Ne pas avoir la ligne du bas
-                    if (x not in range(14,17)) or (y not in range(14,20)): #Ne pas avoir les lignes inconstructibles
-                        #Vertical
-                        ligne_verticale = self.canvas_mid.create_line(x0,y0,x0,y1,dash=[2,4], fill="white", width=3, activefill='black', activewidth=6, tag='ligne_verticale')
-                        self.canvas_mid.tag_bind(ligne_verticale, '<Button-1>', self.item_left_click)
-                        self.canvas_mid.tag_bind(ligne_verticale, '<Button-3>', self.item_right_click)
-                        self.canvas_mid.tag_bind(ligne_verticale, '<Enter>', self.evenement_entrer)
-                        self.canvas_mid.tag_bind(ligne_verticale, '<Leave>', self.evenement_sortir)
+        self.create_canvas()
         
         #Permet de passer l'objet et le type d'objet sélectionné
         self.item = 'None'
@@ -179,6 +137,50 @@ class Raids(Frame):
         self.list_all =[self.list_sols, self.list_murs, self.list_stockages, self.list_etablis, self.list_decorations, self.list_autres]
 
 
+    def create_canvas(self):
+        #Création ligne/Rectangle
+        width = int(self.canvas_mid.winfo_width())-4
+        height = int(self.canvas_mid.winfo_height())-4
+    
+        for y in range(1,20):
+            for x in range(1,20):
+                x0 = (x)*(width/20)+2
+                y0 = (y)*(height/20)+2
+                x1 = (x+1)*(width/20)+2
+                y1 = (y+1)*(height/20)+2
+
+                #Rectangle
+                if(x in range(13,17)) and (y in range(14, 19)):
+                    rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill=self.colors_rec[0], width=0)
+
+                else:
+                    if((x != 19) and (y != 19)):
+                        rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#8fbc8f', width=0 , activefill="red", tag='rec')
+                        self.canvas_mid.tag_bind(rec, '<Button-1>', self.item_left_click)
+                        self.canvas_mid.tag_bind(rec, '<Button-3>', self.item_right_click)
+                        self.canvas_mid.tag_bind(rec, '<Enter>', self.evenement_entrer)
+                        self.canvas_mid.tag_bind(rec, '<Leave>', self.evenement_sortir)
+
+                #Ligne
+                if(x != 19): #Ne pas avoir la colonne de droite
+                    if (x not in range(13,17)) or (y not in range(15,20)): #Ne pas avoir les lignes inconstructibles
+                        #Horizontal 
+                        ligne_horizontale = self.canvas_mid.create_line(x0,y0,x1,y0, dash=[2,4], fill="white", width=3, activefill='black', activewidth=6, tag='ligne_horizontale')
+                        self.canvas_mid.tag_bind(ligne_horizontale, '<Button-1>', self.item_left_click)
+                        self.canvas_mid.tag_bind(ligne_horizontale, '<Button-3>', self.item_right_click)
+                        self.canvas_mid.tag_bind(ligne_horizontale, '<Enter>', self.evenement_entrer)
+                        self.canvas_mid.tag_bind(ligne_horizontale, '<Leave>', self.evenement_sortir)
+                
+                if(y != 19): #Ne pas avoir la ligne du bas
+                    if (x not in range(14,17)) or (y not in range(14,20)): #Ne pas avoir les lignes inconstructibles
+                        #Vertical
+                        ligne_verticale = self.canvas_mid.create_line(x0,y0,x0,y1,dash=[2,4], fill="white", width=3, activefill='black', activewidth=6, tag='ligne_verticale')
+                        self.canvas_mid.tag_bind(ligne_verticale, '<Button-1>', self.item_left_click)
+                        self.canvas_mid.tag_bind(ligne_verticale, '<Button-3>', self.item_right_click)
+                        self.canvas_mid.tag_bind(ligne_verticale, '<Enter>', self.evenement_entrer)
+                        self.canvas_mid.tag_bind(ligne_verticale, '<Leave>', self.evenement_sortir)
+        
+
     def clear_frame(self, frame):
         """
         Supprime tous les éléments d'une Frame
@@ -186,7 +188,6 @@ class Raids(Frame):
         for widgets in frame.winfo_children():
             widgets.destroy()
 
-    #FIXME  => REGROUPER PRINCIPAL et PRINCIPAL BIS: Use try/except?
     def frame_right_mid_principal(self):
         """
         Création de la frame right mid principale
@@ -321,7 +322,6 @@ class Raids(Frame):
         else:
             raise NameError
     
-
 
         print('clicked:', button_txt)
 
