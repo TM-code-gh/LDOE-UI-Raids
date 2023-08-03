@@ -13,7 +13,6 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 
 <ins>**TODO**</ins>:
 - Faire correspondre les modifications de **item_left_click(event)** à **item_right_click(event)**
-- Trouver un moyen simple d'associer **frame_right_mid_principal()** et **frame_right_mid_principal_bis(from_frame)**
 - Boutons Reset pour reset le canvas
 - S'occuper du fonctionnement du bouton "wrap" d'une frame => Utilisable notamment pour les options ["Tout", "Sols & Murs"] et sûrment ["Craftable", "Non craftable"]
 - PNG des objets:
@@ -36,6 +35,8 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 ================================ 03/08/23 ==============================
 
 - Ajout des cas d'usages: 'Stockages', 'Établis', 'Décorations' et 'Autres' dans **frame_right_mid_secondary(button_txt)**
+- Ajout de fct **create_canvas()** en remplacement du code dans **initUi()** en vue du bouton Reset du canvas
+- Abandon de l'idée 'Trouver un moyen simple d'associer **frame_right_mid_principal()** et **frame_right_mid_principal_bis(from_frame)**'
 <br>
 
 =========================== ** -> 02/08/23 =============================
