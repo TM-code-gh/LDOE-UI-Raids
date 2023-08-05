@@ -32,6 +32,13 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 - Étendre l'application aux spécificités de la colonie
 <br>
 
+================================ 05/08/23 ==============================
+- Modification des listes d'objets en dictionnaire plus complexe {"catégorie:{objet:[nb, max, val_sol_min]}"}
+- Modification de la fonction **frame_right_mid_secondary(button_txt)** pour s'adapter au nouveau format des listes d'objets et name
+- Création de la fonction **generate_item(self, name, x1, y1, orientation, val_sol)**
+- Modification de **item_left_click(event)** pour prendre en compte les cliques sur les rectangles hors bouton sols
+<br>
+
 ================================ 03/08/23 ==============================
 
 - Ajout des cas d'usages: 'Stockages', 'Établis', 'Décorations' et 'Autres' dans **frame_right_mid_secondary(button_txt)**
