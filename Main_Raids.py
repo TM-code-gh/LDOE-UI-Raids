@@ -117,22 +117,47 @@ class Raids(Frame):
         
         self.list_sols = ["Sans sol", "T1", "T2", "T3", "T4", "T5"]
         self.list_murs = ["Sans murs", "T1", "T2", "T3", "T4", "T5"]
-        self.list_stockages = {"Craftable":["Petite boîte", "Coffre", "Malle", "Râtelier (lvl X)"], 
-                          "Non craftable":["Coffre-fort","Entrepôt", "Réfrigérateur", "Une autre tournée", "Triomphe", "Armoire pharmacie", "Étagère", "Dépôt déchets",
-                                           "Boîte compartimenté", "Caisse élec"]}
         
-        self.list_etablis = {"Craftable":["Feu de camp", "Potager", "Établi Bois", "Fourneau", "Collecteur pluie", "Chevalet tannage", "Séchoir viande", "Table pierre",
-                                     "Cuisinière", "Établi armes", "Table couture", "Établi (Plaque)", "Recycleur", "Table médicale", "Fourneau raffiné","Pompe manuelle",
-                                     "Presse", "Labo élec", "Station chimie", "Système Hydroponique"], 
-                        "Non craftable":["Goût sûr"]}
+        #{"catégorie:{objet:[nb, max, val_sol_min]}"}
+        self.list_stockages = {
+            "Craftable":{"Petite boîte":{"nb":0, "max":40, "val_sol_min":1}, "Coffre":{"nb":0, "max":40, "val_sol_min":1}, "Malle":{"nb":0, "max":40, "val_sol_min":2}, 
+                         "Râtelier (lvl X)":{"nb":0, "max":40, "val_sol_min":3}}, 
+            "Non craftable":{"Coffre-fort":{"nb":0, "max":5, "val_sol_min":1},"Entrepôt":{"nb":0, "max":1, "val_sol_min":0}, "Réfrigérateur":{"nb":0, "max":1, "val_sol_min":3}, 
+                             "Une autre tournée":{"nb":0, "max":1, "val_sol_min":0}, "Triomphe":{"nb":0, "max":1, "val_sol_min":3}, "Armoire pharmacie":{"nb":0, "max":1, "val_sol_min":3}, 
+                             "Étagère":{"nb":0, "max":1, "val_sol_min":2}, "Dépôt déchets":{"nb":0, "max":1, "val_sol_min":2}, "Boîte compartimenté":{"nb":0, "max":1, "val_sol_min":3}, 
+                             "Caisse élec":{"nb":0, "max":1, "val_sol_min":3}}
+            }
+
+        self.list_etablis = {
+            "Craftable":{"Feu de camp":{"nb":0, "max":2, "val_sol_min":0}, "Potager":{"nb":0, "max":2, "val_sol_min":0}, "Établi Bois":{"nb":0, "max":2, "val_sol_min":1}, 
+                         "Fourneau":{"nb":0, "max":2, "val_sol_min":1}, "Collecteur pluie":{"nb":0, "max":2, "val_sol_min":0}, "Chevalet tannage":{"nb":0, "max":2, "val_sol_min":0}, 
+                         "Séchoir viande":{"nb":0, "max":2, "val_sol_min":1}, "Table pierre":{"nb":0, "max":2, "val_sol_min":1}, "Cuisinière":{"nb":0, "max":1, "val_sol_min":3}, 
+                         "Établi armes":{"nb":0, "max":1, "val_sol_min":2}, "Table couture":{"nb":0, "max":2, "val_sol_min":2}, "Établi (Plaque)":{"nb":0, "max":2, "val_sol_min":2}, 
+                         "Recycleur":{"nb":0, "max":2, "val_sol_min":2}, "Table médicale":{"nb":0, "max":2, "val_sol_min":2}, "Fourneau raffiné":{"nb":0, "max":2, "val_sol_min":0}, 
+                         "Pompe manuelle":{"nb":0, "max":1, "val_sol_min":0}, "Presse":{"nb":0, "max":2, "val_sol_min":4}, "Labo élec":{"nb":0, "max":1, "val_sol_min":3}, 
+                         "Station chimie":{"nb":0, "max":1, "val_sol_min":4}, "Système Hydroponique":{"nb":0, "max":1, "val_sol_min":4}}, 
+            "Non craftable":{"Goût sûr":{"nb":0, "max":2, "val_sol_min":0}}
+            }
         
-        self.list_decorations = {"Craftable":["Plante d'intérieur", "Table", "Canapé douillet", "lampadaire", "Lit comfortable", "Mangeoire", "Râtelier armes", "Épicéa",
-                                        "Parterre fleurs pneu", "Bain fleurs", "Étang décoratif", "Sculpture"], 
-                            "Non craftable":["Mannequin", "Hologramme", "Gramophone", "Tête sorcière"]}
+        self.list_decorations = {
+            "Craftable":{"Plante d'intérieur":{"nb":0, "max":15, "val_sol_min":1}, "Table":{"nb":0, "max":3, "val_sol_min":2}, "Canapé douillet":{"nb":0, "max":4, "val_sol_min":2}, 
+                         "lampadaire":{"nb":0, "max":10, "val_sol_min":1}, "Lit comfortable":{"nb":0, "max":3, "val_sol_min":3}, "Mangeoire":{"nb":0, "max":4, "val_sol_min":0}, 
+                         "Râtelier armes":{"nb":0, "max":3, "val_sol_min":3}, "Épicéa":{"nb":0, "max":3, "val_sol_min":1}, "Parterre fleurs pneu":{"nb":0, "max":3, "val_sol_min":0}, 
+                         "Bain fleurs":{"nb":0, "max":3, "val_sol_min":0}, "Étang décoratif":{"nb":0, "max":3, "val_sol_min":0}, "Sculpture":{"nb":0, "max":1, "val_sol_min":0}}, 
+            "Non craftable":{"Mannequin":{"nb":0, "max":1, "val_sol_min":0}, "Hologramme":{"nb":0, "max":1, "val_sol_min":0}, "Gramophone":{"nb":0, "max":1, "val_sol_min":0}, 
+                             "Tête sorcière":{"nb":0, "max":1, "val_sol_min":0}}
+            }
         
-        self.list_autres = {"Craftable":["Radios", "Chopper", "Douche", "Piège piques", "Cage chien", "Garage", "Garde-robe", "Miroir", "Piège fil", "Fil barbelé",
-                                    "Générateur élec", "Bain acide", "Bateau moteur", "ATV", "Tourelle", "Drone station", "Établi up drone", "Toilettes exté"],
-                        "Non craftable":["Pompe"]}
+        self.list_autres = {
+            "Craftable":{"Radios":{"nb":0, "max":1, "val_sol_min":1}, "Chopper en contru":{"nb":0, "max":1, "val_sol_min":1}, "Chopper fonctionnel":{"nb":0, "max":1, "val_sol_min":0}, 
+                         "Douche":{"nb":0, "max":2, "val_sol_min":0}, "Piège piques":{"nb":0, "max":80, "val_sol_min":0}, "Cage chien":{"nb":0, "max":1, "val_sol_min":0}, 
+                         "Garage":{"nb":0, "max":1, "val_sol_min":0}, "Garde-robe":{"nb":0, "max":1, "val_sol_min":1}, "Miroir":{"nb":0, "max":1, "val_sol_min":1}, 
+                         "Piège fil":{"nb":0, "max":1, "val_sol_min":0}, "Fil barbelé":{"nb":0, "max":20, "val_sol_min":0}, "Générateur élec":{"nb":0, "max":1, "val_sol_min":1}, 
+                         "Bain acide":{"nb":0, "max":1, "val_sol_min":3}, "Bateau en contru":{"nb":0, "max":1, "val_sol_min":3}, "ATV en contru":{"nb":0, "max":1, "val_sol_min":3}, 
+                         "ATV fonctionnel":{"nb":0, "max":1, "val_sol_min":0}, "Tourelle":{"nb":0, "max":4, "val_sol_min":3}, "Drone station":{"nb":0, "max":1, "val_sol_min":3}, 
+                         "Établi up drone":{"nb":0, "max":1, "val_sol_min":3}, "Toilettes exté":{"nb":0, "max":1, "val_sol_min":0}},
+            "Non craftable":{"Pompe":{"nb":0, "max":1, "val_sol_min":0}}
+            }
 
         self.list_all =[self.list_sols, self.list_murs, self.list_stockages, self.list_etablis, self.list_decorations, self.list_autres]
 
@@ -158,8 +183,8 @@ class Raids(Frame):
                         rec = self.canvas_mid.create_rectangle(x0,y0,x1,y1, fill='#8fbc8f', width=0 , activefill="red", tag='rec')
                         self.canvas_mid.tag_bind(rec, '<Button-1>', self.item_left_click)
                         self.canvas_mid.tag_bind(rec, '<Button-3>', self.item_right_click)
-                        self.canvas_mid.tag_bind(rec, '<Enter>', self.evenement_entrer)
-                        self.canvas_mid.tag_bind(rec, '<Leave>', self.evenement_sortir)
+                        self.canvas_mid.tag_bind(rec, '<Enter>', self.event_enter)
+                        self.canvas_mid.tag_bind(rec, '<Leave>', self.event_get_out)
 
                 #Ligne
                 if(x != 19): #Ne pas avoir la colonne de droite
@@ -168,8 +193,8 @@ class Raids(Frame):
                         ligne_horizontale = self.canvas_mid.create_line(x0,y0,x1,y0, dash=[2,4], fill="white", width=3, activefill='black', activewidth=6, tag='ligne_horizontale')
                         self.canvas_mid.tag_bind(ligne_horizontale, '<Button-1>', self.item_left_click)
                         self.canvas_mid.tag_bind(ligne_horizontale, '<Button-3>', self.item_right_click)
-                        self.canvas_mid.tag_bind(ligne_horizontale, '<Enter>', self.evenement_entrer)
-                        self.canvas_mid.tag_bind(ligne_horizontale, '<Leave>', self.evenement_sortir)
+                        self.canvas_mid.tag_bind(ligne_horizontale, '<Enter>', self.event_enter)
+                        self.canvas_mid.tag_bind(ligne_horizontale, '<Leave>', self.event_get_out)
                 
                 if(y != 19): #Ne pas avoir la ligne du bas
                     if (x not in range(14,17)) or (y not in range(14,20)): #Ne pas avoir les lignes inconstructibles
@@ -177,10 +202,9 @@ class Raids(Frame):
                         ligne_verticale = self.canvas_mid.create_line(x0,y0,x0,y1,dash=[2,4], fill="white", width=3, activefill='black', activewidth=6, tag='ligne_verticale')
                         self.canvas_mid.tag_bind(ligne_verticale, '<Button-1>', self.item_left_click)
                         self.canvas_mid.tag_bind(ligne_verticale, '<Button-3>', self.item_right_click)
-                        self.canvas_mid.tag_bind(ligne_verticale, '<Enter>', self.evenement_entrer)
-                        self.canvas_mid.tag_bind(ligne_verticale, '<Leave>', self.evenement_sortir)
+                        self.canvas_mid.tag_bind(ligne_verticale, '<Enter>', self.event_enter)
+                        self.canvas_mid.tag_bind(ligne_verticale, '<Leave>', self.event_get_out)
         
-
     def clear_frame(self, frame):
         """
         Supprime tous les éléments d'une Frame
@@ -276,48 +300,63 @@ class Raids(Frame):
 
                 if(button_txt=='Stockages'):
                     self.frame_right_mid_XXX.place(relx=0, y=80+1, relwidth=1, height=max([len(self.list_stockages['Non craftable']),len(self.list_stockages['Craftable'])])*20+50)
+                    
+                    k=0
+                    for item in (self.list_stockages['Non craftable']):
+                        Button(self.frame_right_mid_XXX, text=item, name='stockages non_craftable ' +item, anchor="w",
+                            command=lambda item=item:self.button_left_click_frame_right_mid_XXXX(name='stockages non_craftable ' +item)).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+                        k+=1
+                    
+                    k=0
+                    for item in (self.list_stockages['Craftable']):
+                        Button(self.frame_right_mid_XXX, text=item, name='stockages craftable ' +item,  anchor="w",
+                            command=lambda item=item:self.button_left_click_frame_right_mid_XXXX(name='stockages craftable ' +item)).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
+                        k+=1
 
-                    for k in range (len(self.list_stockages['Non craftable'])):
-                        Button(self.frame_right_mid_XXX, text=self.list_stockages['Non craftable'][k], name='stockages ' +self.list_stockages['Non craftable'][k], anchor="w",
-                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='stockages ' +self.list_stockages['Non craftable'][k])).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
-
-                    for k in range (len(self.list_stockages['Craftable'])):
-                        Button(self.frame_right_mid_XXX, text=self.list_stockages['Craftable'][k], name='stockages ' +self.list_stockages['Craftable'][k],  anchor="w",
-                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='stockages ' +self.list_stockages['Craftable'][k])).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
-                
                 elif(button_txt=='Établis'):
                     self.frame_right_mid_XXX.place(relx=0, y=80+1, relwidth=1, height=max([len(self.list_etablis['Non craftable']),len(self.list_etablis['Craftable'])])*20+50)
 
-                    for k in range (len(self.list_etablis['Non craftable'])):
-                        Button(self.frame_right_mid_XXX, text=self.list_etablis['Non craftable'][k], name='établis ' +self.list_etablis['Non craftable'][k], anchor="w",
-                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='établis ' +self.list_etablis['Non craftable'][k])).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+                    k=0
+                    for item in (self.list_etablis['Non craftable']):
+                        Button(self.frame_right_mid_XXX, text=item, name='établis non_craftable ' +item, anchor="w",
+                            command=lambda item=item:self.button_left_click_frame_right_mid_XXXX(name='établis non_craftable ' +item)).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+                        k+=1
 
-                    for k in range (len(self.list_etablis['Craftable'])):
-                        Button(self.frame_right_mid_XXX, text=self.list_etablis['Craftable'][k], name='établis ' +self.list_etablis['Craftable'][k],  anchor="w",
-                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='établis ' +self.list_etablis['Craftable'][k])).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
-                
+                    k=0
+                    for item in (self.list_etablis['Craftable']):
+                        Button(self.frame_right_mid_XXX, text=item, name='établis craftable ' +item,  anchor="w",
+                            command=lambda item=item:self.button_left_click_frame_right_mid_XXXX(name='établis craftable ' +item)).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
+                        k+=1
+
                 elif(button_txt=='Décorations'):
                     self.frame_right_mid_XXX.place(relx=0, y=80+1, relwidth=1, height=max([len(self.list_decorations['Non craftable']),len(self.list_decorations['Craftable'])])*20+50)
 
-                    for k in range (len(self.list_decorations['Non craftable'])):
-                        Button(self.frame_right_mid_XXX, text=self.list_decorations['Non craftable'][k], name='décorations ' +self.list_decorations['Non craftable'][k], anchor="w",
-                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='décorations ' +self.list_decorations['Non craftable'][k])).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+                    k=0
+                    for item in (self.list_decorations['Non craftable']):
+                        Button(self.frame_right_mid_XXX, text=item, name='décorations non_craftable ' +item, anchor="w",
+                            command=lambda item=item:self.button_left_click_frame_right_mid_XXXX(name='décorations non_craftable ' +item)).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+                        k+=1
 
-                    for k in range (len(self.list_decorations['Craftable'])):
-                        Button(self.frame_right_mid_XXX, text=self.list_decorations['Craftable'][k], name='décorations ' +self.list_decorations['Craftable'][k],  anchor="w",
-                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='décorations ' +self.list_decorations['Craftable'][k])).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
-                
+                    k=0
+                    for item in (self.list_decorations['Craftable']):
+                        Button(self.frame_right_mid_XXX, text=item, name='décorations craftable ' +item,  anchor="w",
+                            command=lambda item=item:self.button_left_click_frame_right_mid_XXXX(name='décorations craftable ' +item)).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
+                        k+=1
+
                 elif(button_txt=='Autres'):
                     self.frame_right_mid_XXX.place(relx=0, y=80+1, relwidth=1, height=max([len(self.list_autres['Non craftable']),len(self.list_autres['Craftable'])])*20+50)
 
-                    for k in range (len(self.list_autres['Non craftable'])):
-                        Button(self.frame_right_mid_XXX, text=self.list_autres['Non craftable'][k], name='autres ' +self.list_autres['Non craftable'][k], anchor="w",
-                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='autres ' +self.list_autres['Non craftable'][k])).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+                    k=0
+                    for item in (self.list_autres['Non craftable']):
+                        Button(self.frame_right_mid_XXX, text=item, name='autres non_craftable ' +item, anchor="w",
+                            command=lambda item=item:self.button_left_click_frame_right_mid_XXXX(name='autres non_craftable ' +item)).place(relx=x, y=y+k*height, relwidth=relwidth, height=height)
+                        k+=1
 
-                    for k in range (len(self.list_autres['Craftable'])):
-                        Button(self.frame_right_mid_XXX, text=self.list_autres['Craftable'][k], name='autres ' +self.list_autres['Craftable'][k],  anchor="w",
-                            command=lambda k=k:self.button_left_click_frame_right_mid_XXXX(name='autres ' +self.list_autres['Craftable'][k])).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
-                
+                    k=0
+                    for item in (self.list_autres['Craftable']):
+                        Button(self.frame_right_mid_XXX, text=item, name='autres craftable ' +item,  anchor="w",
+                            command=lambda item=item:self.button_left_click_frame_right_mid_XXXX(name='autres craftable ' +item)).place(relx=3*x+relwidth, y=y+k*height, relwidth=relwidth, height=height)
+                        k+=1
 
         else:
             raise NameError
@@ -325,8 +364,58 @@ class Raids(Frame):
 
         print('clicked:', button_txt)
 
+    
+    def generate_item(self, name, x1, y1, orientation, val_sol):
+        """
+        Vérifie que l'item à poser ne déroge pas aux conditions de pose (max item)
 
-    def evenement_entrer(self, event):
+
+        """
+        #{'Craftable':{'item':[pos x, pos y, orientation(n/o/s/e), taille[nb_case x, nb_case y], sol(Nv.)###taille(relx, rely)]}}
+        names=name.split(" ",2)
+        categorie=' '.join(names[1].split("_",1)).capitalize()
+
+        if(names[0]=='stockages'):
+            if(categorie=='Craftable'):
+                total=0
+                vals = self.list_stockages[categorie].values()
+                
+                for val in vals:
+                    total+=val['nb']
+
+                if(total<self.list_stockages[categorie][names[2]]['max']):
+                    self.list_stockages[categorie][names[2]]['nb']+=1
+                else:
+                    print('Nombre max. d\'objets atteint:', names[2])
+            
+            else:
+                if(self.list_stockages[categorie][names[2]]['nb']<self.list_stockages[categorie][names[2]]['max']):
+                    self.list_stockages[categorie][names[2]]['nb']+=1
+                else:
+                    print('Nombre max. d\'objets atteint:', names[2])
+                    
+        elif(names[0]=='établis'):
+            if(self.list_etablis[categorie][names[2]]['nb']<self.list_etablis[categorie][names[2]]['max']):
+                self.list_etablis[categorie][names[2]]['nb']+=1
+            else:
+                print('Nombre max. d\'objets atteint:', names[2])
+        
+        elif(names[0]=='décorations'):
+            if(self.list_decorations[categorie][names[2]]['nb']<self.list_decorations[categorie][names[2]]['max']):
+                self.list_decorations[categorie][names[2]]['nb']+=1
+            else:
+                print('Nombre max. d\'objets atteint:', names[2])
+        
+        elif(names[0]=='autres'):
+            if(self.list_autres[categorie][names[2]]['nb']<self.list_autres[categorie][names[2]]['max']):
+                self.list_autres[categorie][names[2]]['nb']+=1
+            else:
+                print('Nombre max. d\'objets atteint:', names[2])
+
+        return True
+
+
+    def event_enter(self, event):
         """
         Entrer dans un nouveau type d'objet: rectange/ligne
         """
@@ -335,7 +424,7 @@ class Raids(Frame):
         #print("entrer:",self.item_type, '\n')
 
     #Potentiellement non nécessaire
-    def evenement_sortir(self, event):
+    def event_get_out(self, event):
         """
         Sortir d'un objet: rectange/ligne
         """
@@ -372,14 +461,22 @@ class Raids(Frame):
             
         else:
             name=self.last.name
-            names=name.split(" ",1)
+            names=name.split(" ",2)
 
             if(names[0] == 'sols') and (self.item_type == "rectangle"):
                 colors_list = self.colors_rec
-                new_indice = self.list_sols.index(names[1])
+                new_indice = self.list_sols.index(names[2])
+
             elif(names[0] == 'murs') and (self.item_type == "line"):
                 colors_list = self.colors_line
-                new_indice = self.list_murs.index(names[1])
+                new_indice = self.list_murs.index(names[2])
+
+            elif(self.item_type == "rectangle"):
+                x1, y1, x2, y2 = self.canvas_mid.coords(self.item)
+                val_nv = self.colors_rec.index(self.canvas_mid.itemcget(self.item, 'fill'))
+
+                self.generate_item(name,x1,y1,'n',val_nv)
+                return False
             else:
                 return False
 
@@ -412,6 +509,8 @@ class Raids(Frame):
     def button_left_click_frame_right_mid_XXXX(self, name):
         """
         Clique gauche sur un bouton de la frame_right_mid_XXXX
+
+        Définit self.last, modifie le relief et le state de certains boutons
         """
         try:
             self.last.config(relief=RAISED, state='normal') #test si la variable qui représente le dernier bouton sélectionné de la frame frame_right_mid_XXX est configurable (donc existe)
@@ -419,8 +518,6 @@ class Raids(Frame):
             pass
 
         butt = self.frame_right_mid_XXX.nametowidget(name)
-        names=name.split(" ",1)
-        print(names)
         butt.config(relief=SUNKEN, state='disabled')
 
         self.last = butt
