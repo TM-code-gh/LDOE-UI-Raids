@@ -23,13 +23,27 @@ Projet d'application pour créer/explorer des bases pour les raids dans LDOE.
 - Lier le texte dans la frame _mid_top_ et la table sélectionnée dans la BDD de _left_mid_
 - Gestion de sauvegarde du "dessin" => Idée : Fichiers de configuration + BDD
 - Boutons Sauvegarder/Valider?/Charger/Modifier/Ajouter/Supprimer en lien avec le canvas et la BDD
-- Changement de l'aspect des sols (Images plutôt que couleurs)
+- Bouton Hack pour se passer des limitations du jeu (quantités, val sol, ...) 
+- Changement de l'aspect des sols (Images plutôt que couleurs?)
 - Permettre un changement d'angle du canvas (orientation)
   - Connexe avec une fonction zoom in/out
   - Connexe avec une posibilité d'avoir des sides barres
 <br>
 
 - Étendre l'application aux spécificités de la colonie
+<br>
+
+================================ 26/09/23 ==============================
+- Modification du fichier (LDOE Objet):
+  - Choix d'id pertinent
+  - Valeur par défaut en cas d'absence d'informations (Max, Max pre, taille = 0; sol mini, maxi = 10; Orientation = XXXX)
+  - Ajout d'une BDD pour les coffres
+- Import des tables dans MySQL via MySQL Workbench
+<br>
+
+================================ ??/08/23 ==============================
+- Première version sur Excel (LDOE Objet) des BDDs stockant les objets dans la Base
+  - Nécessiter pour implémenter au mieux la suite de la fct **generate_item**
 <br>
 
 ================================ 05/08/23 ==============================
